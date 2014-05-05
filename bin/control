@@ -111,11 +111,11 @@ function start() {
         #  Backward compatibility.
         print_missing_package_json_warning
         script_n_opts="$node_opts $node_app $node_app_args"
-        executor_cmdline="node $node_opts $node_app $node_app_args"
+        executor_cmdline="node --harmony $node_opts $node_app $node_app_args"
     fi
 
     if [ -f "$OPENSHIFT_REPO_DIR/.openshift/markers/hot_deploy" ]; then
-        nohup supervisor -e 'node|js|coffee' -- $script_n_opts  >> $logf 2>&1 &
+        nohup supervisor -e 'node|js|coffee' -- --harmony $script_n_opts  >> $logf 2>&1 &
     else
         nohup $executor_cmdline >> $logf 2>&1 &
     fi
